@@ -22,8 +22,7 @@ passport.use(new StrategyGoogle({
         skipUserProfile: true // doesn't fetch user profile
     },
     function(iss, sub, profile, accessToken, refreshToken, done) {
-       	console.log(profile.id);
-       	done();
+    	console.log(profile.id);
     }
 ));
 
@@ -32,7 +31,7 @@ router.get('/auth/google',
 
 router.get('/auth/google/callback',
     passport.authenticate('google-openidconnect', {
-        failureRedirect: '/login'
+        failureRedirect: '/auth/google'
     }),
     function(req, res) {
         // Successful authentication, redirect home.
