@@ -21,8 +21,15 @@ router
  				battle.name = fields.name;
  				var enteries = [];
  				for(var filekey in files){
- 					console.log(filekey);
+ 					var entery = {
+ 						title: fields[filekey+'_title'],
+ 						description: fields[filekey+'_description'],
+ 						image:'path_to_random_file'
+ 					};
+ 					enteries.push(entery);
  				}
+ 				battle.enteries = enteries;
+ 				battle.save();
  				res.send('your a gonner');
     		}
 	      
