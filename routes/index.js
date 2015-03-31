@@ -1,7 +1,11 @@
 var express = require('express');
 var passport = require('passport');
 var StrategyGoogle = require('passport-google-openidconnect').Strategy;
+var mongoose = require('mongoose');
 var router = express.Router();
+
+var Users = mongoose.model('Users');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,7 +20,7 @@ passport.use(new StrategyGoogle({
     skipUserProfile: true // doesn't fetch user profile
   },
   function(iss, sub, profile, accessToken, refreshToken, done) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    Users.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
   }
