@@ -32,7 +32,7 @@ module.exports = function(){
 	mongoose.model('Rankings', rankingSchema);
 	mongoose.model('Users', userSchema);
 
-	mongoose.connect('mongodb://localhost/battlerankdev1', function(err){
+	mongoose.connect('mongodb://dev:defcon1@ds059471.mongolab.com:59471/battlerankdev1', function(err){
 		if(err){
 			console.log(err);
 		}
