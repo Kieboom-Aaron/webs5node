@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 	
 var StrategyGoogle = require('passport-google-openidconnect').Strategy;
 passport.use(new StrategyGoogle({
-    lientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
+    clientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
     clientSecret: 'jeIcdXZOGQFWXbfD8e_fiL73',
     callbackURL: 'http://battlerank.herokuapp.com/oauth2callback',
     skipUserProfile: true // doesn't fetch user profile
