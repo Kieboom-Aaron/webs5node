@@ -12,7 +12,7 @@ var StrategyGoogle = require('passport-google-openidconnect').Strategy;
 passport.use(new StrategyGoogle({
     clientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
     clientSecret: 'jeIcdXZOGQFWXbfD8e_fiL73',
-    callbackURL: 'http://battlerank.herokuapp.com/oauth2callback',
+    callbackURL: 'http://battlerank.herokuapp.com/auth/google/callback',
     skipUserProfile: true // doesn't fetch user profile
   },
   function(iss, sub, profile, accessToken, refreshToken, done) {
