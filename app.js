@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+require('./schemas')();
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var battles = require('./routes/battles');
