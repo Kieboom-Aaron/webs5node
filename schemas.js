@@ -5,7 +5,7 @@ module.exports = function(){
 	var enterySchema = new Schema({
 		title : {type:String, required:true},
 		description: {type:String},
-		image: {type:String},
+		image: {type:String, required:true},
 		points: {type:Number, min:0}
 	});
 

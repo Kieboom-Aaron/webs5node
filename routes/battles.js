@@ -2,16 +2,19 @@ var router = require('express').Router(),
 	mongoose = require('mongoose'),
 	Battles = mongoose.model('Battles'),
 	formidable = require('formidable'),
-	imgur = require('imgur');
+	imgur = require('imgur'),
+	fs = require('fs');
 
 function addImage(path, entery, callback){
 	imgur.uploadFile(path)
     	.then(function (json) {
     		entery.image = json.data.link;
+    		fs.unlink(path);
     		callback(null, entery);
     	})
 		.catch(function (err) {
 			callback(err);
+			fs.unlink(path);
 		});
 }
 
@@ -64,13 +67,16 @@ router
  					if(files[filekey].path){
  						addImage(files[filekey].path, entery, function(err, entery){
  							enteries.push(entery);
- 							console.log(enteries.length + '--' + filesLength);
- 							if(enteries.length === filesLength){
+ 							if(enteries.length === filesLength && filesLength > 1){
  								battle.enteries = enteries;
  								saveBattle(battle, res);
  							}
  						});
  					}
+ 				}
+ 				if(filesLength < 2){
+ 					res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
+ 					res.end();
  				} 				
     		}
 	      
@@ -80,11 +86,22 @@ router
 		console.log(req.params);
 		Battles.findOne({id:req.params.id}, function(err, data){
 			if(!data){
-				res.writeHead(204, {'content-type': 'text/plain'});
+				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}else{
 				res.send(data);
 			}
 		});
+	});
+	router.delete('/:id', function(req, res){
+		Battles.findOne({id:req.params.id}).remove().exec(function(err){
+			if(err){
+				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
+				res.end();
+			}else{
+				res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+				res.end();
+			}
+		})
 	});
 module.exports = router;
