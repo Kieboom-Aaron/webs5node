@@ -42,10 +42,21 @@ function saveBattle(battle, res){
 
 router
 	.get('/',function(req, res){
-		Battles.find(function(err, data){
-			data = data || [];
-			res.send(data);
-		});
+		var pagesize = Number(req.query.pagesize);
+		var page = Number(req.query.page);
+		if(page > 0 && pagesize > 0){
+			page = (page - 1) * pagesize;
+			console.log(page + '--' + pagesize);
+			Battles.find({}, {}, {limit:pagesize, skip:page}, function(err, data){
+				data = data || [];
+				res.send(data);
+			});
+		}else{
+			Battles.find(function(err, data){
+				data = data || [];
+				res.send(data);
+			});
+		}
 	});
 	router.post('/', function(req, res){
 		var form = new formidable.IncomingForm();
@@ -83,12 +94,12 @@ router
 	    });
 	});
 	router.get('/:id', function(req, res){
-		console.log(req.params);
 		Battles.findOne({id:req.params.id}, function(err, data){
 			if(!data){
 				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}else{
+				data.enteries.sort(function(a, b){return b.points||0-a.points||0});
 				res.send(data);
 			}
 		});
@@ -101,6 +112,28 @@ router
 			}else{
 				res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
+			}
+		})
+	});
+	router.put('/:id', function(req, res){
+		Battles.findOne({id:req.params.id}, function(err, data){
+			if(!data){
+				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
+				res.end();
+			}else{
+				console.log(req);
+				data.name = req.body.name;
+				data.save(function(err){
+					if(err){
+						res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
+						console.log(err);
+						res.end();
+					}else{
+						res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+						res.write(JSON.stringify(data));
+						res.end();
+					}
+				})
 			}
 		})
 	});
