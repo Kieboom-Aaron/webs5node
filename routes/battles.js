@@ -29,8 +29,17 @@ router
  					enteries.push(entery);
  				}
  				battle.enteries = enteries;
- 				battle.save();
- 				res.send('your a gonner');
+ 				Battles.findOne()
+    				.where({id: {'$ne':null}})
+				    .sort('-id')
+				    .exec(function(err, doc)
+				    {
+				    	doc = doc || {id:-1};
+				        battle.id = (Number(doc.id) + 1);
+				        battle.save(function(err, result){
+		 					res.send(err+'----'+result);
+		 				});
+				    });
     		}
 	      
 	    });
