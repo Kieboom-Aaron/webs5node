@@ -27,11 +27,15 @@ passport.use(new StrategyGoogle({
     		var user;
     		if(!data){
     			user = new Users({googleId: profile.id});
+    			user.save(function(error){
+					console.log(error);
+    			});
     		} else{
     			user = data;
     		}
+
     		console.log(user);
-    		done(user);
+    		done(true);
     	});
     }
 ));
