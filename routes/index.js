@@ -7,30 +7,31 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-
+	
+var StrategyGoogle = require('passport-google-openidconnect').Strategy;
 passport.use(new StrategyGoogle({
-    clientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
+    lientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
     clientSecret: 'jeIcdXZOGQFWXbfD8e_fiL73',
-    callbackURL: "http://battlerank.herokuapp.com/oauth2callback"
+    callbackURL: 'http://battlerank.herokuapp.com/oauth2callback',
+    skipUserProfile: true // doesn't fetch user profile
   },
   function(iss, sub, profile, accessToken, refreshToken, done) {
-	console.log(iss, sub, profile, accessToken, refreshToken, done);
-
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
   }
 ));
 
 router.get('/auth/google',
   passport.authenticate('google-openidconnect'));
 
-router.get('/oauth2callback', 
-  passport.authenticate('google-openidconnect', { failureRedirect: '/auth/google' }),
+router.get('/auth/google/callback', 
+  passport.authenticate('google-openidconnect', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
+
 
 module.exports = router;
