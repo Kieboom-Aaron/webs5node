@@ -23,7 +23,16 @@ passport.use(new StrategyGoogle({
     },
     function(iss, sub, profile, accessToken, refreshToken, done) {
     	console.log(profile.id);
-    	done(profile);
+    	Users.findOne({googleId: profile.id}, function(err, data){
+    		var user;
+    		if(!data){
+    			user = new Users({googleId: profile.id});
+    		} else{
+    			user = data;
+    		}
+    		console.log(user);
+    		done(user);
+    	});
     }
 ));
 

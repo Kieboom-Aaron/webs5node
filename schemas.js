@@ -25,8 +25,9 @@ module.exports = function(){
 		}
 	});
 	var userSchema = new Schema({
-		id : {type:Number, required:true, unique:true},
-		name : {type:String, required:true, unique:true},
+		//id : {type:Number, required:true, unique:true},
+		//name : {type:String, required:true, unique:true},
+		//TODO: naam uit google id halen.
 		googleId : {type:String, required:true, unique:true}
 	});
 	mongoose.model('Battles', battleSchema);
