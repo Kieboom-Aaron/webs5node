@@ -26,7 +26,8 @@ module.exports = function(){
 	});
 	var userSchema = new Schema({
 		id : {type:Number, required:true, unique:true},
-		name : {type:String, required:true, unique:true}
+		name : {type:String, required:true, unique:true},
+		googleId : {type:String, required:true, unique:true}
 	});
 	mongoose.model('Battles', battleSchema);
 	mongoose.model('Rankings', rankingSchema);
