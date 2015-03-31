@@ -22,11 +22,8 @@ passport.use(new StrategyGoogle({
         skipUserProfile: true // doesn't fetch user profile
     },
     function(iss, sub, profile, accessToken, refreshToken, done) {
-        Users.findAndModify({
-            googleId: profile.id
-        }, function(err, user) {
-            return done(err, user);
-        });
+       	console.log(profile.id);
+       	done();
     }
 ));
 
