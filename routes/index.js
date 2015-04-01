@@ -9,11 +9,13 @@ var Users = mongoose.model('Users');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', {
+    res.render('dashboard', {
         title: 'Express'
     });
 });
 
+
+//GOOGLE OpenID Connecta
 var StrategyGoogle = require('passport-google-openidconnect').Strategy;
 passport.use(new StrategyGoogle({
         clientID: '337957115280-b8ovrndgl8ge4arrvgn3idgbtdnuf2l0.apps.googleusercontent.com',
@@ -51,7 +53,5 @@ router.get('/auth/google/callback',
         // Successful authentication, redirect home.
         res.redirect('/');
     });
-
-
 
 module.exports = router;
