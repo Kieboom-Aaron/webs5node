@@ -32,20 +32,12 @@ router.get('/auth/google',
     passport.authenticate('google-openidconnect'));
 
 router.get('/auth/google/callback', function(req, res){
-    console.log('##############################################');
-    console.log(req);
-    console.log('##############################################');
-    res.send();
+    if(req.query.code){
+        res.cookie('google', req.query.code);
+        res.redirect('/');
+    }else{
+        res.redirect('/auth/google');
+    }
 });
-
-    // passport.authenticate('google-openidconnect', {
-    //     failureRedirect: '/auth/google'
-    // }),
-    // function(req, res) {
-        
-    //     // Successful authentication, redirect home.
-    //     res.cookie('google', req.query.code)
-    //     res.redirect('/');
-    // });
 
 module.exports = router;
