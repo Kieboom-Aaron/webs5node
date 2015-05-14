@@ -33,6 +33,7 @@ var router = require('express').Router(),
 
 
 	router.post('/:id', function(req, res){
+		console.log(req.session);
 		var first = req.body.first;
 		var second = req.body.second;
 		var third = req.body.third;
@@ -47,25 +48,17 @@ var router = require('express').Router(),
 					if(b){
 						for(var i = 0; i < b.enteries.length ; i++){
 							if(rating && b.enteries[i].id === rating.rating.first){
-								console.log('-1 - '+ b.enteries[i].id);
-								console.log('before : ' + b.enteries[i].points);
 								b.enteries[i].points = (Number(b.enteries[i].points)||3) - 3;
-								console.log('after : ' + b.enteries[i].points);
 							} else if(rating && b.enteries[i].id === rating.rating.second){
-								console.log('-2 - '+ b.enteries[i].id);
 								b.enteries[i].points = (Number(b.enteries[i].points)||2) - 2;
 							} else if(rating && b.enteries[i].id === rating.rating.third){
-								console.log('-3 - '+ b.enteries[i].id);
 								b.enteries[i].points = (Number(b.enteries[i].points)||1) - 1;
 							}
 							if(b.enteries[i].id === Number(first)){
-								console.log('+1 - '+ b.enteries[i].id);
 								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 3;
 							} else if(b.enteries[i].id === Number(second)){
-								console.log('+2 - '+ b.enteries[i].id);
 								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 2;
 							} else if(b.enteries[i].id === Number(third)){
-								console.log('+3 - '+ b.enteries[i].id);
 								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 1;
 							}
 						}
