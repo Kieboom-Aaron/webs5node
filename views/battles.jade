@@ -1,0 +1,9 @@
+extends layout
+block link
+  -var selected = 'Battles'
+
+block content
+  .list-group 
+    .list-group-item-heading.h1 List of battles
+    each battle in battles
+      a(href="/battlesview/#{battle.id}").list-group-item #{battle.name}

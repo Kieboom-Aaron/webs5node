@@ -106,6 +106,17 @@ router
 			}
 		});
 	});
+	router.get('/:id/enteries', function(req, res){
+		Battles.findOne({id:req.params.id}, function(err, data){
+			if(!data){
+				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
+				res.end();
+			}else{
+				data.enteries.sort(function(a, b){return b.points||0-a.points||0});
+				res.send(data.enteries);
+			}
+		});
+	});
 	router.delete('/:id', function(req, res){
 		Battles.findOne({id:req.params.id}).remove().exec(function(err){
 			if(err){

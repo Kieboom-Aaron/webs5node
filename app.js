@@ -10,7 +10,11 @@ require('./schemas')();
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var battles = require('./routes/battles');
+<<<<<<< HEAD
 var rankings = require('./routes/rankings');
+=======
+var battlesview = require('./routes/battlesview');
+>>>>>>> 4c2c6b9d00bf8fd5fad1a5ad0bf0054ca9280a84
 var app = express();
 
 // view engine setup
@@ -29,6 +33,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/battles', battles);
 app.use('/rankings', rankings);
+app.use('/battlesview', battlesview);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
