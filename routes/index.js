@@ -37,8 +37,10 @@ router.get('/auth/google/callback',
     },
     function(req, res) {
         // Successful authentication, redirect home.
-        res.cookie('google', req);
-        res.redirect('/');
+        console.log(req);
+        //res.cookie('google', req);
+        //res.redirect('/');
+        res.end();
     }));
 
 module.exports = router;
