@@ -24,21 +24,7 @@ passport.use(new StrategyGoogle({
         skipUserProfile: true // doesn't fetch user profile
     },
     function(iss, sub, profile, accessToken, refreshToken, done) {
-    	console.log(profile.id);
-    	Users.findOne({googleId: profile.id}, function(err, data){
-    		var user;
-    		if(!data){
-    			user = new Users({googleId: profile.id});
-    			user.save(function(error){
-					console.log(error);
-    			});
-    		} else{
-    			user = data;
-    		}
-
-    		console.log(user);
-    		done(true);
-    	});
+    	done(true);
     }
 ));
 
@@ -51,8 +37,8 @@ router.get('/auth/google/callback',
     }),
     function(req, res) {
         // Successful authentication, redirect home.
-        res.send(req);
-        //res.redirect('/');
+        res.cookie('google', req);
+        res.redirect('/');
     });
 
 module.exports = router;
