@@ -31,17 +31,21 @@ passport.use(new StrategyGoogle({
 router.get('/auth/google',
     passport.authenticate('google-openidconnect'));
 
-router.get('/auth/google/callback',
-    passport.authenticate('google-openidconnect', {
-        failureRedirect: '/auth/google'
-    }),
-    function(req, res) {
-        console.log('##############################################');
-        console.log(req);
-        console.log('##############################################');
-        // Successful authentication, redirect home.
-        res.cookie('google', req.query.code)
-        res.redirect('/');
-    });
+router.get('/auth/google/callback', function(req, res){
+    console.log('##############################################');
+    console.log(req);
+    console.log('##############################################');
+    res.send();
+});
+
+    // passport.authenticate('google-openidconnect', {
+    //     failureRedirect: '/auth/google'
+    // }),
+    // function(req, res) {
+        
+    //     // Successful authentication, redirect home.
+    //     res.cookie('google', req.query.code)
+    //     res.redirect('/');
+    // });
 
 module.exports = router;
