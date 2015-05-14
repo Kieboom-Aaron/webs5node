@@ -36,6 +36,9 @@ router.get('/auth/google/callback',
         failureRedirect: '/auth/google'
     }),
     function(req, res) {
+        console.log('##############################################');
+        console.log(req);
+        console.log('##############################################');
         // Successful authentication, redirect home.
         res.cookie('google', req.query.code)
         res.redirect('/');
