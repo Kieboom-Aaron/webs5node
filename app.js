@@ -10,11 +10,8 @@ require('./schemas')();
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var battles = require('./routes/battles');
-<<<<<<< HEAD
 var rankings = require('./routes/rankings');
-=======
 var battlesview = require('./routes/battlesview');
->>>>>>> 4c2c6b9d00bf8fd5fad1a5ad0bf0054ca9280a84
 var app = express();
 
 // view engine setup
