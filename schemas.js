@@ -3,6 +3,7 @@ module.exports = function(){
 		Schema = mongoose.Schema;
 
 	var enterySchema = new Schema({
+		id : {type:Number, required:true, unique: true},
 		title : {type:String, required:true},
 		description: {type:String},
 		image: {type:String, required:true},

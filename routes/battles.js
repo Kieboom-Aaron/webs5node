@@ -46,7 +46,6 @@ router
 		var page = Number(req.query.page);
 		if(page > 0 && pagesize > 0){
 			page = (page - 1) * pagesize;
-			console.log(page + '--' + pagesize);
 			Battles.find({}, {}, {limit:pagesize, skip:page}, function(err, data){
 				data = data || [];
 				res.send(data);
@@ -74,6 +73,7 @@ router
  					var entery = {
  						title: fields[filekey+'_title'],
  						description: fields[filekey+'_description'],
+ 						id: filesLength
  					};
  					if(files[filekey].path){
  						addImage(files[filekey].path, entery, function(err, entery){
@@ -96,10 +96,12 @@ router
 	router.get('/:id', function(req, res){
 		Battles.findOne({id:req.params.id}, function(err, data){
 			if(!data){
-				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
+				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}else{
-				data.enteries.sort(function(a, b){return b.points||0-a.points||0});
+				if(req.query.sortby && req.query.sortby === 'points'){
+					data.enteries.sort(function(a, b){return b.points||0-a.points||0});
+				}
 				res.send(data);
 			}
 		});
@@ -118,15 +120,13 @@ router
 	router.put('/:id', function(req, res){
 		Battles.findOne({id:req.params.id}, function(err, data){
 			if(!data){
-				res.writeHead(204, {'content-type': 'application/json; charset=utf-8'});
+				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}else{
-				console.log(req);
 				data.name = req.body.name;
 				data.save(function(err){
 					if(err){
 						res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
-						console.log(err);
 						res.end();
 					}else{
 						res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
@@ -136,5 +136,25 @@ router
 				})
 			}
 		})
+	});
+	router.get('/:id/enteries', function(req, res){
+		var pagesize = Number(req.query.pagesize);
+		var page = Number(req.query.page);
+		Battles.findOne({id:req.params.id}, function(err, data){
+			if(!data){
+				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
+				res.end();
+			}else{
+				if(req.query.sortby && req.query.sortby === 'points'){
+					data.enteries.sort(function(a, b){return b.points||0-a.points||0});
+				}
+				if(page > 0 && pagesize > 0){
+					res.send(data.enteries.slice(((page-1) * pagesize), (page * pagesize)));
+
+				}else{
+					res.send(data.enteries);
+				}
+			}
+		});
 	});
 module.exports = router;
