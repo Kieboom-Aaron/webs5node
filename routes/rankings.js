@@ -33,7 +33,6 @@ var router = require('express').Router(),
 
 
 	router.post('/:id', function(req, res){
-		console.log(req.session);
 		var first = req.body.first;
 		var second = req.body.second;
 		var third = req.body.third;
