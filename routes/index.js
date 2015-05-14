@@ -34,13 +34,11 @@ router.get('/auth/google',
 router.get('/auth/google/callback',
     passport.authenticate('google-openidconnect', {
         failureRedirect: '/auth/google'
-    },
+    }),
     function(req, res) {
         // Successful authentication, redirect home.
-        console.log(req);
-        //res.cookie('google', req);
-        //res.redirect('/');
-        res.end();
-    }));
+        res.cookie('google', req.query.code)
+        res.redirect('/');
+    });
 
 module.exports = router;
