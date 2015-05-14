@@ -51,7 +51,8 @@ router.get('/auth/google/callback',
     }),
     function(req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/');
+        res.send(req);
+        //res.redirect('/');
     });
 
 module.exports = router;
