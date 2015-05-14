@@ -33,7 +33,7 @@ router.get('/auth/google',
 
 router.get('/auth/google/callback', function(req, res){
     if(req.query.code){
-        res.cookie('google', req.query.code);
+        req.session.google = req.query.code;
         res.redirect('/');
     }else{
         res.redirect('/auth/google');

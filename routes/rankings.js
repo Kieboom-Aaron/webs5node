@@ -38,7 +38,10 @@ var router = require('express').Router(),
 		var third = req.body.third;
 		var battle = req.params.id;
 		var user = req.body.id;
-		if(first != second && second != third && first != third){
+		if(!req.session.google){
+			res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
+			res.end();
+		}else if(first != second && second != third && first != third){
 			Rankings.findOne({battleid:battle, userid:user}, function(err, rating){
 				Battles.findOne({id:battle}, function(err, b){
 					if(b){
