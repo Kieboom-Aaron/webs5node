@@ -37,7 +37,7 @@ var router = require('express').Router(),
 		var second = req.body.second;
 		var third = req.body.third;
 		var battle = req.params.id;
-		var user = req.body.id;
+		var user = req.session.google;
 		if(!req.session.google){
 			res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
 			res.end();
