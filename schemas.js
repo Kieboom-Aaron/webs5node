@@ -18,7 +18,7 @@ module.exports = function(){
 
 	var rankingSchema = new Schema({
 		battleid : {type:Number, required:true},
-		userid : {type:Number, required:true},
+		userid : {type:String, required:true},
 		rating : {
 			first : {type:Number, required:true},
 			second : {type:Number, required:true},
