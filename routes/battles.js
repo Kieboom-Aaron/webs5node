@@ -58,40 +58,46 @@ router
 		}
 	});
 	router.post('/', function(req, res){
-		var form = new formidable.IncomingForm();
-    	form.parse(req, function(err, fields, files) {
-    		if(err){
-    			res.writeHead(500, {'content-type': 'application/json; charset=utf-8'});
-    			res.end();
-    		}else{
- 				var battle = new Battles();
- 				battle.name = fields.name;
- 				var enteries = [];
- 				var filesLength = 0;
- 				for(var filekey in files){
- 					filesLength++;
- 					var entery = {
- 						title: fields[filekey+'_title'],
- 						description: fields[filekey+'_description'],
- 						id: filesLength
- 					};
- 					if(files[filekey].path){
- 						addImage(files[filekey].path, entery, function(err, entery){
- 							enteries.push(entery);
- 							if(enteries.length === filesLength && filesLength > 1){
- 								battle.enteries = enteries;
- 								saveBattle(battle, res);
- 							}
- 						});
- 					}
- 				}
- 				if(filesLength < 2){
- 					res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
- 					res.end();
- 				} 				
-    		}
-	      
-	    });
+		if(req.session.google){
+			var form = new formidable.IncomingForm();
+	    	form.parse(req, function(err, fields, files) {
+	    		if(err){
+	    			res.writeHead(500, {'content-type': 'application/json; charset=utf-8'});
+	    			res.end();
+	    		}else{
+	 				var battle = new Battles();
+	 				battle.name = fields.name;
+	 				var enteries = [];
+	 				var filesLength = 0;
+	 				for(var filekey in files){
+	 					filesLength++;
+	 					var entery = {
+	 						title: fields[filekey+'_title'],
+	 						description: fields[filekey+'_description'],
+	 						id: filesLength,
+	 						owner: req.session.google
+	 					};
+	 					if(files[filekey].path){
+	 						addImage(files[filekey].path, entery, function(err, entery){
+	 							enteries.push(entery);
+	 							if(enteries.length === filesLength && filesLength > 1){
+	 								battle.enteries = enteries;
+	 								saveBattle(battle, res);
+	 							}
+	 						});
+	 					}
+	 				}
+	 				if(filesLength < 2){
+	 					res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
+	 					res.end();
+	 				} 				
+	    		}
+		      
+		    });
+	    }else{
+	    	res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
+			res.end();
+	    }
 	});
 	router.get('/:id', function(req, res){
 		Battles.findOne({id:req.params.id}, function(err, data){
@@ -118,12 +124,19 @@ router
 		});
 	});
 	router.delete('/:id', function(req, res){
-		Battles.findOne({id:req.params.id}).remove().exec(function(err){
-			if(err){
-				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
-				res.end();
+		Battles.findOne({id:req.params.id}, function(err, data){
+			if(data.owner === req.session.google){
+				Battles.findOne({id:req.params.id}).remove().exec(function(err){
+					if(err){
+						res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
+						res.end();
+					}else{
+						res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+						res.end();
+					}
+				});
 			}else{
-				res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+				res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}
 		})
@@ -134,17 +147,22 @@ router
 				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});
 				res.end();
 			}else{
-				data.name = req.body.name;
-				data.save(function(err){
-					if(err){
-						res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
-						res.end();
-					}else{
-						res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
-						res.write(JSON.stringify(data));
-						res.end();
-					}
-				})
+				if(req.session.google === data.owner){
+					data.name = req.body.name;
+					data.save(function(err){
+						if(err){
+							res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
+							res.end();
+						}else{
+							res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
+							res.write(JSON.stringify(data));
+							res.end();
+						}
+					})
+				}else{
+					res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
+					res.end();
+				}
 			}
 		})
 	});
