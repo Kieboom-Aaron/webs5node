@@ -67,6 +67,7 @@ router
 	    		}else{
 	 				var battle = new Battles();
 	 				battle.name = fields.name;
+	 				battle.owner = req.session.google;
 	 				var enteries = [];
 	 				var filesLength = 0;
 	 				for(var filekey in files){
@@ -74,8 +75,7 @@ router
 	 					var entery = {
 	 						title: fields[filekey+'_title'],
 	 						description: fields[filekey+'_description'],
-	 						id: filesLength,
-	 						owner: req.session.google
+	 						id: filesLength
 	 					};
 	 					if(files[filekey].path){
 	 						addImage(files[filekey].path, entery, function(err, entery){
