@@ -16,4 +16,17 @@ router.get('/', function(req, res){
 	});
 });
 
+router.get('/:id', function(req, res, next) {
+    Battles.findOne({
+        id: req.params.id
+    }, function(err, data) {
+    	console.log(data);
+        res.render('pick', {
+            title: data.name,
+            battle: data,
+            scripts: ['../js/battlepicker.js']
+        });
+    });
+});
+
 module.exports = router;
