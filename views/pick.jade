@@ -1,0 +1,18 @@
+extends layout
+block link
+  -var selected = 'Battles'
+
+block content
+    .container
+      // Example row of columns
+      .row
+        #card0.col-lg-4
+          img(src="http://placehold.it/300x200", width="300px", height="200px")
+          h2 Heading
+          a.btn.btn-default(role='button') This one
+        #card1.col-lg-4
+          img(src="http://placehold.it/300x200" width="300px", height="200px")
+          h2 Heading
+          a.btn.btn-default(role='button') This one
+    script(type='text/javascript').
+      var data =!{JSON.stringify(battle)} //This renders the data sent to the view back to an json object
