@@ -3,7 +3,8 @@ var router = require('express').Router(),
 	Battles = mongoose.model('Battles'),
 	formidable = require('formidable'),
 	imgur = require('imgur'),
-	fs = require('fs');
+	fs = require('fs'),
+	socketServer;
 
 function addImage(path, entery, callback){
 	imgur.uploadFile(path)
@@ -31,6 +32,7 @@ function saveBattle(battle, res){
 					if(!err){
 						res.writeHead(201, {'content-type': 'application/json; charset=utf-8'});
 						res.write(JSON.stringify(battle));
+						updateSocket();
 					}else{
 						res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});
 						console.log(err);
@@ -133,6 +135,7 @@ router
 					}else{
 						res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
 						res.end();
+						updateSocket();
 					}
 				});
 			}else{
@@ -157,6 +160,7 @@ router
 							res.writeHead(200, {'content-type': 'application/json; charset=utf-8'});
 							res.write(JSON.stringify(data));
 							res.end();
+							updateSocket();
 						}
 					})
 				}else{
@@ -186,4 +190,17 @@ router
 			}
 		});
 	});
+
+	function updateSocket(){
+		Battles.find(function(err, data){
+			if(data){
+				socketServer.emit('battles', data);
+			}
+		});
+	}
+
+	router.setSocketServer = function(socketserver){
+		socketServer = socketserver;
+	};
+
 module.exports = router;

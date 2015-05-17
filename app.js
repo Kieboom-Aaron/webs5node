@@ -64,5 +64,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.setSocketServer = function(socketserver){
+  battles.setSocketServer(socketserver);
+};
 
 module.exports = app;
