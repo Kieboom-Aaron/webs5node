@@ -2,12 +2,15 @@
 // Deze variabele moet ik dan opslaan en mee gaan kutten.
 
 //The variable data contains the entries (enteries) 
+
 var entries = data.enteries;
+console.log(data);
 console.log(entries);
 
 var zeroLost = entries.length;
 var oneLost = 0;
 var twoLost = 0;
+var steps = 0;
 
 var shownEntries = [];
 
@@ -17,6 +20,7 @@ for (var i = entries.length - 1; i >= 0; i--) {
 }
 
 function pickEntry(index) {
+	steps++;
     console.log('pickEntry ', index);
     if (index === 0) {
         addLoss(shownEntries[1]);
@@ -29,6 +33,7 @@ function pickEntry(index) {
 }
 
 function addLoss(entry) {
+	console.info(entry.title);
     switch (entry.lossCount) {
         case 0:
             zeroLost--;
@@ -43,9 +48,12 @@ function addLoss(entry) {
             break;
     }
     entry.lossCount++;
+
+    console.log('Zerolost: ' + zeroLost, 'onelost: ' + oneLost, 'twolost: ' + twoLost, 'entry losscount: ' + entry.lossCount);
 }
 
 function nextEntries() {
+	console.log('nextEntries');
     if (zeroLost > 1) {
         shownEntries = getEntries(0);
     } else if (oneLost > 1) {
@@ -54,11 +62,37 @@ function nextEntries() {
         shownEntries = getEntries(2);
     } else {
         console.log('you\'re done');
-        console.log(entries);
+        console.log(steps);
+        entries.sort(function(a, b){return a.lossCount-b.lossCount;});
+        submitResult();
+        alert('je bent klaar ofzo. ga iets ander doen. JWZ');
+        return;
     }
+
+    showEntries();
+}
+
+function submitResult () {
+	$.ajax({
+		url: '/rankings/' + data.id,
+		type: 'POST',
+		dataType: 'json',
+		data: {first: entries[0].id, second: entries[1].id, third: entries[2].id},
+	})
+	.done(function() {
+		console.log("success");
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+	
 }
 
 function getEntries(lossCount) {
+	console.log('getEntries', lossCount);
     var nextEntries = [];
     var index = 0;
 
@@ -68,6 +102,7 @@ function getEntries(lossCount) {
             index++;
         }
         if (nextEntries.length === 2) {
+        	console.log(nextEntries);
             return nextEntries;
         }
     }
@@ -82,22 +117,24 @@ showEntries();
 
 function showEntries() {
 	var callbackzero = function(data) {
+		console.log('left one picked');
 	    pickEntry(0);
 	};
 	var callbackone = function(data) {
+		console.log('right one picked');
 	    pickEntry(1);
 	};
 	for (var i = shownEntries.length - 1; i >= 0; i--) {
 	    var card = $('#card' + i).children();
-	    console.log(card);
-	    shownEntries[i].sequence = i;
 	    card[0].src = shownEntries[i].image;
 	    card[1].innerHTML = shownEntries[i].title;
 
 	    if (i === 0) {
-	        card[2].addEventListener("click", callbackzero, false);
+	        // card[2].addEventListener("click", callbackzero, false);
+	        card[2].onclick = callbackzero;
 	    } else {
-	        card[2].addEventListener("click", callbackone, false);
+	        // card[2].addEventListener("click", callbackone, false);
+	        card[2].onclick = callbackone;
 	    }
 	}
 }
