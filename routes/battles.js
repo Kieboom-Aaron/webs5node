@@ -199,8 +199,11 @@ router
 		});
 	}
 
-	router.setSocketServer = function(socketserver){
+	var setSocketServer = function(socketserver){
 		socketServer = socketserver;
 	};
 
-module.exports = router;
+module.exports = {
+	router : router,
+	setSocketServer : setSocketServer
+};

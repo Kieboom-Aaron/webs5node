@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var holder = require('../app');
+var app = holder.app;
 var debug = require('debug')('battlerank:server');
 var http = require('http');
 
@@ -25,12 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
  var io = require('socket.io')(server);
- app.setSocketServer(io);
-
+ holder.setSocketServer(io);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
 /**
  * Normalize a port into a number, string, or false.
  */

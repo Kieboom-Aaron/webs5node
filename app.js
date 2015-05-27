@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/battles', battles);
+app.use('/battles', battles.router);
 app.use('/rankings', rankings);
 app.use('/battlesview', battlesview);
 
@@ -64,8 +64,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.setSocketServer = function(socketserver){
-  battles.setSocketServer(socketserver);
-};
-
-module.exports = app;
+module.exports = {
+  app : app,
+  setSocketServer : function(ss){
+    battles.setSocketServer(ss);
+  }
+}; 
