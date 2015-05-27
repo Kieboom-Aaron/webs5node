@@ -61,11 +61,8 @@ function nextEntries() {
     } else if (twoLost > 1) {
         shownEntries = getEntries(2);
     } else {
-        console.log('you\'re done');
-        console.log(steps);
         entries.sort(function(a, b){return a.lossCount-b.lossCount;});
         submitResult();
-        alert('je bent klaar ofzo. ga iets ander doen. JWZ');
         return;
     }
 
@@ -80,19 +77,15 @@ function submitResult () {
 		data: {first: entries[0].id, second: entries[1].id, third: entries[2].id},
 	})
 	.done(function() {
-		console.log("success");
+		alert('je bent klaar ofzo. ga iets ander doen. JWZ');
 	})
 	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
+		alert('submit failed');
 	});
 	
 }
 
 function getEntries(lossCount) {
-	console.log('getEntries', lossCount);
     var nextEntries = [];
     var index = 0;
 

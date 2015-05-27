@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var battles = require('./routes/battles');
 var rankings = require('./routes/rankings');
 var battlesview = require('./routes/battlesview');
+var rankingsview = require('./routes/rankingsview');
 var app = express();
 
 // view engine setup
@@ -32,6 +33,7 @@ app.use('/users', users);
 app.use('/battles', battles.router);
 app.use('/rankings', rankings);
 app.use('/battlesview', battlesview);
+app.use('/rankingsview', rankingsview);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

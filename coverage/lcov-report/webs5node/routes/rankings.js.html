@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for webs5node\routes\rankings.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../prettify.css">
+    <link rel="stylesheet" href="../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">webs5node\routes\rankings.js</span></h1>
+    <h2>
+        Statements: <span class="metric">8.47% <small>(5 / 59)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">8.47% <small>(5 / 59)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">webs5node/routes/</a> &#187; rankings.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">var router = require('express').Router(),
+	mongoose = require('mongoose'),
+	Rankings = mongoose.model('Rankings'),
+	Battles = mongoose.model('Battles');
+&nbsp;
+	router.get('/', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >		var pagesize = Number(req.query.pagesize);</span>
+<span class="cstat-no" title="statement not covered" >		var page = Number(req.query.page);</span>
+<span class="cstat-no" title="statement not covered" >		if(page &gt; 0 &amp;&amp; pagesize &gt; 0){</span>
+<span class="cstat-no" title="statement not covered" >			page = (page - 1) * pagesize;</span>
+<span class="cstat-no" title="statement not covered" >			Rankings.find({}, {}, {limit:pagesize, skip:page}, <span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >				data = data || [];</span>
+<span class="cstat-no" title="statement not covered" >				res.send(data);</span>
+			});
+		}else{
+<span class="cstat-no" title="statement not covered" >			Rankings.find(<span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >				data = data || [];</span>
+<span class="cstat-no" title="statement not covered" >				res.send(data);</span>
+			});
+		}
+	});
+&nbsp;
+	router.get('/:id', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >		Rankings.find({battleid:req.params.id}, <span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >			if(!data){</span>
+<span class="cstat-no" title="statement not covered" >				res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});</span>
+<span class="cstat-no" title="statement not covered" >				res.end();</span>
+			}else{
+<span class="cstat-no" title="statement not covered" >				res.send(data);</span>
+			}
+		});
+	});
+&nbsp;
+&nbsp;
+	router.post('/:id', <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >		var first = req.body.first;</span>
+<span class="cstat-no" title="statement not covered" >		var second = req.body.second;</span>
+<span class="cstat-no" title="statement not covered" >		var third = req.body.third;</span>
+<span class="cstat-no" title="statement not covered" >		var battle = req.params.id;</span>
+<span class="cstat-no" title="statement not covered" >		var user = req.session.google;</span>
+<span class="cstat-no" title="statement not covered" >		if(!req.session.google){</span>
+<span class="cstat-no" title="statement not covered" >			res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});</span>
+<span class="cstat-no" title="statement not covered" >			res.end();</span>
+		}else <span class="cstat-no" title="statement not covered" >if(first != second &amp;&amp; second != third &amp;&amp; first != third){</span>
+<span class="cstat-no" title="statement not covered" >			Rankings.findOne({battleid:battle, userid:user}, <span class="fstat-no" title="function not covered" >function(err, rating){</span></span>
+<span class="cstat-no" title="statement not covered" >				Battles.findOne({id:battle}, <span class="fstat-no" title="function not covered" >function(err, b){</span></span>
+<span class="cstat-no" title="statement not covered" >					if(b){</span>
+<span class="cstat-no" title="statement not covered" >						for(var i = 0; i &lt; b.enteries.length ; i++){</span>
+<span class="cstat-no" title="statement not covered" >							if(rating &amp;&amp; b.enteries[i].id === rating.rating.first){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||3) - 3;</span>
+							} else <span class="cstat-no" title="statement not covered" >if(rating &amp;&amp; b.enteries[i].id === rating.rating.second){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||2) - 2;</span>
+							} else <span class="cstat-no" title="statement not covered" >if(rating &amp;&amp; b.enteries[i].id === rating.rating.third){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||1) - 1;</span>
+							}
+<span class="cstat-no" title="statement not covered" >							if(b.enteries[i].id === Number(first)){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 3;</span>
+							} else <span class="cstat-no" title="statement not covered" >if(b.enteries[i].id === Number(second)){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 2;</span>
+							} else <span class="cstat-no" title="statement not covered" >if(b.enteries[i].id === Number(third)){</span>
+<span class="cstat-no" title="statement not covered" >								b.enteries[i].points = (Number(b.enteries[i].points)||0) + 1;</span>
+							}
+						}
+<span class="cstat-no" title="statement not covered" >						b.save();</span>
+<span class="cstat-no" title="statement not covered" >						res.send(b);</span>
+<span class="cstat-no" title="statement not covered" >						if(!rating){</span>
+<span class="cstat-no" title="statement not covered" >							rating = new Rankings();</span>
+<span class="cstat-no" title="statement not covered" >							rating.battleid = battle;</span>
+<span class="cstat-no" title="statement not covered" >							rating.userid = user;</span>
+						}
+<span class="cstat-no" title="statement not covered" >						rating.rating.first = first;</span>
+<span class="cstat-no" title="statement not covered" >						rating.rating.second = second;</span>
+<span class="cstat-no" title="statement not covered" >						rating.rating.third = third;</span>
+<span class="cstat-no" title="statement not covered" >						rating.save();</span>
+					}else{
+<span class="cstat-no" title="statement not covered" >						res.writeHead(404, {'content-type': 'application/json; charset=utf-8'});</span>
+<span class="cstat-no" title="statement not covered" >						res.end();</span>
+					}
+				});
+			});
+		}else{
+<span class="cstat-no" title="statement not covered" >			res.writeHead(400, {'content-type': 'application/json; charset=utf-8'});</span>
+<span class="cstat-no" title="statement not covered" > 			res.end();</span>
+		}
+	});
+module.exports = router;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed May 27 2015 16:31:42 GMT+0200 (West-Europa (zomertijd))</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

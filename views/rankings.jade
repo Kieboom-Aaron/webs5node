@@ -1,0 +1,9 @@
+extends layout
+block link
+  -var selected = 'Rankings'
+
+block content
+  .list-group 
+    .list-group-item-heading.h1 List of rankings
+    each battle in battles
+      a(href="/rankingsview/#{battle.id}").list-group-item #{battle.name}
