@@ -39,7 +39,7 @@ var router = require('express').Router(),
 		var battle = req.params.id;
 		console.log(req.headers);
 		var user = req.session.google || req.headers['x-token'];
-		if(user){
+		if(!user){
 			res.writeHead(403, {'content-type': 'application/json; charset=utf-8'});
 			res.end();
 		}else if(first != second && second != third && first != third){
